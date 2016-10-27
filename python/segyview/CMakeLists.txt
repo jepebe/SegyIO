@@ -6,6 +6,8 @@ set(PYTHON_SOURCES
     segyplot.py
     slicewidget.py
     viewer.py
+    layoutcombo.py
+    util.py
     )
 
 add_python_package(segyview segyview "${PYTHON_SOURCES}")
