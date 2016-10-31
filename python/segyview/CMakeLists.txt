@@ -7,6 +7,7 @@ set(PYTHON_SOURCES
     slicewidget.py
     viewer.py
     layoutcombo.py
+    layoutcanvas.py
     util.py
     )
 
