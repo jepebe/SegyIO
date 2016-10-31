@@ -2,6 +2,8 @@ from .segyplot import SegyPlot
 from .segyiowrapper import SegyIOWrapper, SlicesWrapper
 
 try:
+    from .layoutcanvas import LayoutCanvas
+    from .layoutcombo import LayoutCombo
     from .linenavigationbar import LineNavigationBar
     from .progresswidget import ProgressWidget
     from .slicewidget import SliceWidget
