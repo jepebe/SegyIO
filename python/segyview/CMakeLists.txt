@@ -8,6 +8,7 @@ set(PYTHON_SOURCES
     viewer.py
     layoutcombo.py
     layoutcanvas.py
+    colormapcombo.py
     util.py
     )
 
