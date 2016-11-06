@@ -11,13 +11,13 @@ class LayoutCombo(QComboBox):
         QComboBox.__init__(self, parent)
 
         layouts = [
-            {
-                "icon": "layouts_four_grid.png",
-                "spec": {
-                    "dims": (2, 2),
-                    "grid": [(0, 0), (0, 1), (1, 0), (1, 1)]
-                }
-            },
+            # {
+            #     "icon": "layouts_four_grid.png",
+            #     "spec": {
+            #         "dims": (2, 2),
+            #         "grid": [(0, 0), (0, 1), (1, 0), (1, 1)]
+            #     }
+            # },
             {
                 "icon": "layouts_three_bottom_grid.png",
                 "spec": {

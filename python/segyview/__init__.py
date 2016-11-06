@@ -1,9 +1,16 @@
 from .segyplot import SegyPlot
+from .layoutfigure import LayoutFigure
+
 from .segyiowrapper import SegyIOWrapper, SlicesWrapper
 
 try:
     from .colormapcombo import ColormapCombo
+    from .slicemodel import SliceModel, SliceDirection
+    from .slicedatasource import SliceDataSource
+    from .slicemodelcontroller import SliceModelController
+    from .sliceview import SliceView
     from .layoutcanvas import LayoutCanvas
+    from .sliceviewwidget import SliceViewWidget
     from .layoutcombo import LayoutCombo
     from .linenavigationbar import LineNavigationBar
     from .progresswidget import ProgressWidget

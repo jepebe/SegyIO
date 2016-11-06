@@ -1,59 +1,46 @@
 from PyQt4 import QtGui
+from PyQt4.QtCore import pyqtSignal, Qt
 
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-from matplotlib.axes import Axes
-from matplotlib import gridspec
+
+from segyview import LayoutFigure
 
 
 class LayoutCanvas(FigureCanvas):
-    def __init__(self, parent=None, width=11.7, height=8.3, dpi=100):
-        self._figure = Figure(figsize=(width, height), dpi=dpi, tight_layout=True)
-        self._axes = []
-        """ :type: list[Axes] """
+    layout_changed = pyqtSignal()
+    subplot_clicked = pyqtSignal(dict)
+
+    def __init__(self, width=11.7, height=8.3, dpi=100, parent=None):
+        self._figure = LayoutFigure(width, height, dpi)
 
         FigureCanvas.__init__(self, self._figure)
         self.setParent(parent)
 
-        FigureCanvas.setSizePolicy(self, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-        FigureCanvas.updateGeometry(self)
+        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.updateGeometry()
+        self.setFocusPolicy(Qt.ClickFocus)
+        self.setFocus()
+
+        self.mpl_connect('button_press_event', self._mouse_clicked)
+
+    def _mouse_clicked(self, event):
+        if event.inaxes is not None:
+            data = {
+                "x": event.xdata,
+                "y": event.ydata,
+                "mx": event.x,
+                "my": event.y,
+                "button": event.button,
+                "key": event.key,
+                "subplot_index": self._figure.index(event.inaxes)
+            }
+            self.subplot_clicked.emit(data)
 
     def set_plot_layout(self, layout_spec):
-        grid_spec = gridspec.GridSpec(*layout_spec['dims'])
-
-        for axes in self._axes:
-            self._figure.delaxes(axes)
-
-        self._axes = [self._figure.add_subplot(grid_spec[sub_spec]) for sub_spec in layout_spec['grid']]
-
-        for axes in self._axes:
-            axes.hold(False)
-
+        self._figure.set_plot_layout(layout_spec)
+        self.layout_changed.emit()
         self.draw()
 
-    def index(self, axes):
-        """
-        Args:
-            axes (Axes): The Axes instance to find the index of.
-
-        Returns:
-            int
-        """
-        return self._axes.index(axes)
-
-    def __getitem__(self, index):
-        """
-        Args:
-            index (int):
-
-        Returns:
-            Axes
-        """
-        return self._axes[index]
-
-    def __len__(self):
-        return len(self._axes)
-
-    def __iter__(self):
-        for x in range(len(self)):
-            yield self[x]
+    def layout_figure(self):
+        """ :rtype: LayoutFigure """
+        return self._figure

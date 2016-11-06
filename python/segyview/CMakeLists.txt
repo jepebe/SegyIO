@@ -9,6 +9,12 @@ set(PYTHON_SOURCES
     layoutcombo.py
     layoutcanvas.py
     colormapcombo.py
+    layoutfigure.py
+    slicemodel.py
+    slicedatasource.py
+    slicemodelcontroller.py
+    sliceview.py
+    sliceviewwidget.py
     util.py
     )
 
