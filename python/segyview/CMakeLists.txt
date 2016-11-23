@@ -9,7 +9,11 @@ set(PYTHON_SOURCES
     layoutcombo.py
     colormapcombo.py
     layoutfigure.py
-    layoutcanvas.py
+    slicemodel.py
+    slicedatasource.py
+    slicemodelcontroller.py
+    sliceview.py
+    sliceviewwidget.py
     )
 
 add_python_package(segyview segyview "${PYTHON_SOURCES}")

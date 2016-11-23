@@ -56,6 +56,7 @@ class SegyPlot(object):
                                          vmax=self.vmax)
 
 
+
         if display_vertical_indicator:
             self.vertical_indicator_rect = self.slice_axes.add_patch(
                 patches.Rectangle(

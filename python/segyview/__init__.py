@@ -1,8 +1,5 @@
 import os.path as path
 
-from .segyplot import SegyPlot
-from .segyiowrapper import SegyIOWrapper, SlicesWrapper
-
 img_prefix = path.abspath(path.join(path.dirname(path.abspath(__file__)), "resources", "img"))
 
 if not path.exists(img_prefix):
@@ -23,8 +20,15 @@ def resource_icon(name):
 try:
     from .colormapcombo import ColormapCombo
     from .layoutcombo import LayoutCombo
+    from .slicemodel import SliceModel, SliceDirection
     from .layoutfigure import LayoutFigure
     from .layoutcanvas import LayoutCanvas
+    from .slicedatasource import SliceDataSource
+
+    from .slicemodelcontroller import SliceModelController
+    from .sliceview import SliceView
+    from .sliceviewwidget import SliceViewWidget
+
     from .progresswidget import ProgressWidget
     from .slicewidget import SliceWidget, ColorBarWidget
     from .segyiowrapper import SegyIOWrapper, SlicesWrapper
@@ -33,10 +37,11 @@ try:
 except ImportError as e:
     import sys
     import traceback
+
     exc_type, exc_value, exc_traceback = sys.exc_info()
     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stderr)
 
-__version__    = '1.0.4'
-__copyright__  = 'Copyright 2016, Statoil ASA'
-__license__    = 'GNU Lesser General Public License version 3'
-__status__     = 'Production'
+__version__ = '1.0.4'
+__copyright__ = 'Copyright 2016, Statoil ASA'
+__license__ = 'GNU Lesser General Public License version 3'
+__status__ = 'Production'
